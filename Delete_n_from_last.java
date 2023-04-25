@@ -13,26 +13,6 @@ class Solution {
         if(head.next == null){
             return null;
         }
-        if(head.next.next == null){
-            if(n==1){
-                head.next = null;
-                return head;
-            }else{
-                return head.next;
-            }
-        } 
-        if(head.next.next.next == null){
-            if(n==1){
-                head.next.next = null;
-                return head;
-            }else if(n==2){
-                head.next = head.next.next;
-                return head;
-            }else{
-                head = head.next;
-                return head;
-            }
-        }
         
         int size = 0;
         ListNode curr = head;
@@ -40,16 +20,23 @@ class Solution {
             curr = curr.next;
             size++;
         }
-
         if(n == size){
             head = head.next;
             return head;
         }
+        if(n == size-1){
+            head.next = head.next.next;
+            return head;
+        }
+        if(n == size-2){
+            head.next.next = head.next.next.next;
+            return head;
+        }
 
-        int indexToSearch = size-n;
+        int indexToSearch = size-n+1;
         int i = 1;
         ListNode prev = head; 
-        while(i < indexToSearch){
+        while(i < indexToSearch-1){
             prev = prev.next;
             i++;
         }
